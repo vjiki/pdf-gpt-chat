@@ -1,0 +1,48 @@
+server:
+  port: 8500
+  servlet:
+    context-path: /
+
+openai-service:
+  api-key:
+  gpt-model: gpt-3.5-turbo
+  audio-model: whisper-1
+  http-client:
+    read-timeout: 50000
+    connect-timeout: 50000
+  urls:
+    base-url: https://api.openai.com/v1
+    chat-url: /chat/completions
+    create-transcription-url: /audio/transcriptions
+
+logging:
+  level:
+    com.vjiki.pdf.gpt.chat: TRACE
+
+# Spring
+spring:
+  jackson:
+    default-property-inclusion: NON_NULL
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+        auth: true
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: 'ALWAYS'
+  health:
+    circuitbreakers:
+      enabled: true
